@@ -74,7 +74,7 @@ SignalR/
 
 ### 1. Login — Web App and Desktop App
 
-> 📎 *[demo/Login.gif]*
+> 📎 ![Login](demo/Login.gif)
 
 - User logs in via the web app at `/Identity/Account/Login`
 - User logs in via the WinForms desktop app's login form (calls `/api/auth/login`, receives a JWT)
@@ -89,7 +89,7 @@ SignalR/
 
 ### 2. Room Creation — Creator Adds Multiple Members
 
-> 📎 *[RoomCreation.gif]*
+> 📎 ![Room Creation](demo/RoomCreation.gif)
 
 - User1 creates **Room1** and selects User2 and User3 as members
 - **Expected on all three clients simultaneously, no refresh:**
@@ -101,7 +101,7 @@ SignalR/
 
 ### 3. Room Message — Delivered to All Room Members
 
-> 📎 *[MessageToGroup.gif]*
+> 📎 ![Room Message](demo/MessageToGroup.gif)
 
 - User1 sends a message to Room1 (which has User1, User2, User3 as members)
 - **Expected on all three clients:**
@@ -114,7 +114,7 @@ SignalR/
 
 ### 4. Room Isolation — Non-Member Cannot See Room or Its Messages
 
-> 📎 *[TwoUsersRoom.gif]*
+> 📎 ![Room Isolation](demo/TwoUsersRoom.gif)
 
 - User2 creates **Room2** and adds only User3 as a member
 - **Expected:**
@@ -128,7 +128,7 @@ SignalR/
 
 ### 5. Private Message — Isolated to Sender and Recipient
 
-> 📎 *[PrivateMessage.gif]*
+> 📎 ![Private Message](demo/PrivateMessage.gif)
 
 - User2 sends User3 a private message
 - **Expected:**
@@ -141,7 +141,7 @@ SignalR/
 
 ### 6. Room Deletion — Creator-Only Authorization
 
-> 📎 *[Delete.gif]*
+> 📎 ![Room Deletion](demo/Delete.gif)
 
 - User1 created Room1 — User1 is the only one who can delete it
 - User2 and User3 attempt to delete Room1 — their delete buttons are disabled (client-side check via `data-creator` attribute)
