@@ -43,19 +43,6 @@ SignalR/
     ├── MainForm.cs
     └── Models/LoginResult.cs
 ```
-
-### Key design decisions
-
-- **`AddIdentityCore` not `AddIdentity`** — avoids automatic cookie scheme registration that would conflict with the manually configured JWT scheme added for the desktop client.
-- **`Guid`-keyed `ApplicationUser`** — clean foreign keys on `ChatRoomMember` and `ChatMessage`.
-- **Explicit `ChatRoomMember` join entity** — not a skinny EF many-to-many, allows future extension (e.g. `JoinedAt`).
-- **Single `ChatMessage` table** for both room and private messages — `ChatRoomId` and `RecipientUserId` are both nullable; exactly one is set per message, enforced at the service layer.
-- **`Restrict` FK behavior on user-facing relationships** — avoids SQL Server's multi-cascade-path error. `Cascade` only on room-facing FKs (deleting a room removes its messages and memberships).
-- **SignalR Groups for room broadcasts** — `room-{id}` group per room. Non-members are never added to the group, so isolation is enforced at the transport level.
-- **`Clients.User(...)` for private messages and room-creation notifications** — Groups handle room-scoped broadcasts; user-ID targeting handles "send to one specific person across all their tabs/connections."
-- **Client-initiated group join** — when a room is created, `RoomCreated` is sent to all members via `Clients.Users(...)`. Each client's JS/WinForms handler then calls back `JoinRoomGroup` on the Hub, which re-validates membership before adding the connection to the group. This is necessary because the Hub can only call `Groups.AddToGroupAsync` on connections it owns — it can't directly add another user's connection to a group.
-- **Dual auth on the Hub** — `[Authorize(AuthenticationSchemes = "Identity.Application,Bearer")]` lets the same Hub accept both cookie-authenticated web clients and JWT-authenticated desktop clients without any changes to Hub logic. Claims are identical in both schemes (`ClaimTypes.NameIdentifier`, `ClaimTypes.Name`), so `CurrentUserId`/`CurrentUserName` work regardless of which scheme authenticated the caller.
-
 ---
 
 ## Features
