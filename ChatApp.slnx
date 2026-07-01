@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ChatApp.Desktop/ChatApp.Desktop.csproj" />
+  <Project Path="ChatApp.Web/ChatApp.Web.csproj" />
+</Solution>
